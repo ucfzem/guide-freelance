@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InFreelancing — Checklist Administrative</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #F0C866;
+            --gold-dim: #8A6A1E;
+            --dark-bg: #1A1208;
+            --dark-surface: #231A0A;
+            --dark-card: #2E2010;
+            --dark-card-hover: #3A2A14;
+            --dark-border: #4A3418;
+            --dark-text: #F5ECD7;
+            --dark-muted: #A08B68;
+            --dark-accent: #C9A84C;
+            --light-bg: #FAF3E8;
+            --light-surface: #F2E8D4;
+            --light-card: #FFFAF2;
+            --light-card-hover: #FFF5E6;
+            --light-border: #D4B97A;
+            --light-text: #2C1A06;
+            --light-muted: #7A5A30;
+            --light-accent: #8A5C1E;
+        }
+        [data-theme="dark"] {
+            --bg: var(--dark-bg); --surface: var(--dark-surface); --card: var(--dark-card);
+            --card-hover: var(--dark-card-hover); --border: var(--dark-border); --text: var(--dark-text);
+            --muted: var(--dark-muted); --accent: var(--dark-accent); --btn-text: #1A1208;
+        }
+        [data-theme="light"] {
+            --bg: var(--light-bg); --surface: var(--light-surface); --card: var(--light-card);
+            --card-hover: var(--light-card-hover); --border: var(--light-border); --text: var(--light-text);
+            --muted: var(--light-muted); --accent: var(--light-accent); --btn-text: #FAF3E8;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg); color: var(--text); line-height: 1.65;
+            min-height: 100vh; transition: background 0.3s, color 0.3s;
+        }
+        [dir="rtl"] body { font-family: 'Inter', -apple-system, sans-serif; }
+
+        .top-bar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; justify-content: flex-end; align-items: center; gap: 8px;
+            padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--border);
+        }
+        .lang-btn {
+            background: var(--card); border: 1.5px solid var(--border); border-radius: 6px;
+            padding: 5px 10px; cursor: pointer; font-size: 13px; font-weight: 600;
+            color: var(--muted); display: flex; align-items: center; gap: 5px;
+            transition: all 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .lang-btn:hover, .lang-btn.active { border-color: var(--gold); color: var(--gold); background: var(--card-hover); }
+        .lang-btn .flag { font-size: 16px; line-height: 1; }
+        .theme-toggle {
+            background: var(--card); border: 1.5px solid var(--border); border-radius: 50px;
+            padding: 5px 12px; cursor: pointer; font-size: 16px; display: flex;
+            align-items: center; gap: 5px; transition: all 0.25s; margin-left: 6px;
+        }
+        .theme-toggle:hover { border-color: var(--gold); transform: scale(1.04); }
+        .theme-toggle .label {
+            font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
+            color: var(--muted); text-transform: uppercase;
+        }
+
+        .container { max-width: 680px; margin: 0 auto; padding: 60px 14px 60px; }
+        .header {
+            position: relative; text-align: center; padding: 44px 24px 36px;
+            border-radius: 16px; margin-bottom: 28px; overflow: hidden;
+            background: var(--surface); border: 1px solid var(--border);
+        }
+        .header::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .header-ornament {
+            font-size: 11px; font-family: 'Cinzel', serif; letter-spacing: 0.25em;
+            color: var(--gold); text-transform: uppercase; margin-bottom: 14px; opacity: 0.8;
+        }
+        .header h1 {
+            font-family: 'Cinzel', serif; font-size: 32px; font-weight: 700;
+            letter-spacing: 0.08em; line-height: 1.1;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 6px;
+        }
+        .header-sub {
+            font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--muted); font-weight: 500; margin-bottom: 18px;
+        }
+        .header-desc {
+            font-size: 14px; color: var(--muted); font-style: italic;
+            border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px;
+        }
+        .progress-wrap {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 16px 18px; margin-bottom: 24px;
+        }
+        .progress-top {
+            display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;
+        }
+        .progress-label {
+            font-size: 12px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--muted);
+        }
+        .progress-count { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 700; color: var(--gold); }
+        .progress-track { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+            border-radius: 99px; transition: width 0.4s ease; width: 0%;
+        }
+        .section-title { display: flex; align-items: center; gap: 10px; margin: 32px 0 14px; }
+        .section-title h2 {
+            font-family: 'Cinzel', serif; font-size: 17px; font-weight: 600;
+            color: var(--gold); letter-spacing: 0.05em;
+        }
+        .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+        .card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 18px; margin-bottom: 14px;
+            transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { background: var(--card-hover); border-color: var(--gold-dim); box-shadow: 0 4px 20px rgba(201,168,76,0.08); }
+        .badge {
+            display: inline-block; font-family: 'Cinzel', serif; font-size: 10px; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+            background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+            padding: 3px 9px; border-radius: 4px; margin-bottom: 10px;
+        }
+        .step-header h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+        p { font-size: 14px; color: var(--muted); margin-bottom: 10px; line-height: 1.7; }
+        p:last-child { margin-bottom: 0; }
+        p strong { color: var(--text); font-weight: 600; }
+        ul { list-style: none; padding: 0; }
+        li {
+            font-size: 14px; color: var(--muted); padding: 6px 0 6px 18px;
+            position: relative; border-bottom: 1px solid var(--border); line-height: 1.5;
+        }
+        [dir="rtl"] li { padding: 6px 18px 6px 0; }
+        li:last-child { border-bottom: none; }
+        li::before { content: '\25C6'; position: absolute; left: 0; top: 8px; font-size: 6px; color: var(--gold); }
+        [dir="rtl"] li::before { left: auto; right: 0; }
+        li strong { color: var(--text); font-weight: 600; }
+        .tip {
+            background: rgba(201,168,76,0.08); border-left: 3px solid var(--gold);
+            border-radius: 0 8px 8px 0; padding: 12px 14px; margin: 14px 0 0;
+            font-size: 13px; color: var(--muted); font-style: italic;
+        }
+        [dir="rtl"] .tip { border-left: none; border-right: 3px solid var(--gold); border-radius: 8px 0 0 8px; }
+        .tip strong { color: var(--gold); font-style: normal; }
+        .oblig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .oblig-col h3 {
+            font-family: 'Cinzel', serif; font-size: 12px; font-weight: 600;
+            letter-spacing: 0.1em; color: var(--gold); margin-bottom: 10px; text-transform: uppercase;
+        }
+        .oblig-col ul { list-style: none; padding: 0; }
+        .oblig-col li { font-size: 13px; padding: 5px 0 5px 14px; border-bottom: 1px dashed var(--border); }
+        [dir="rtl"] .oblig-col li { padding: 5px 14px 5px 0; }
+        .oblig-col li::before { font-size: 5px; top: 9px; }
+        .checklist-title {
+            font-size: 11px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--muted); margin-bottom: 14px;
+        }
+        .checklist-item {
+            display: flex; align-items: flex-start; gap: 12px; padding: 11px 0;
+            border-bottom: 1px solid var(--border); cursor: pointer; transition: opacity 0.2s;
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item.done { opacity: 0.55; }
+        .checklist-item.done .item-text { text-decoration: line-through; }
+        .cb-wrap { flex-shrink: 0; width: 20px; height: 20px; position: relative; margin-top: 1px; }
+        .cb-wrap input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+        .cb-box {
+            width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px;
+            background: var(--surface); display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .cb-box::after {
+            content: '\2713'; font-size: 12px; font-weight: 700; color: var(--btn-text);
+            opacity: 0; transform: scale(0.6); transition: all 0.15s;
+        }
+        .cb-wrap input:checked + .cb-box { background: var(--gold); border-color: var(--gold); }
+        .cb-wrap input:checked + .cb-box::after { opacity: 1; transform: scale(1); }
+        .item-text { font-size: 14px; color: var(--text); line-height: 1.4; }
+        .item-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+        .footer { text-align: center; margin-top: 40px; padding: 20px; }
+        .footer-line { width: 60px; height: 1px; background: var(--border); margin: 0 auto 14px; }
+        .footer p { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gold); letter-spacing: 0.1em; margin: 0; }
+        .footer small { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; }
+        .intro-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+        .intro-card p { font-size: 14px; color: var(--muted); }
+        .intro-card p:first-child { margin-bottom: 8px; }
+        .reset-btn {
+            display: block; width: 100%; margin-top: 16px; padding: 11px;
+            background: transparent; border: 1.5px solid var(--border); border-radius: 8px;
+            color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+            text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .reset-btn:hover { border-color: var(--gold); color: var(--gold); }
+        @media (max-width: 400px) {
+            .oblig-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <button class="lang-btn" data-lang="fr" onclick="switchLang('fr')"><span class="flag">🇫🇷</span> FR</button>
+    <button class="lang-btn" data-lang="en" onclick="switchLang('en')"><span class="flag">🇬🇧</span> EN</button>
+    <button class="lang-btn" data-lang="es" onclick="switchLang('es')"><span class="flag">🇪🇸</span> ES</button>
+    <button class="lang-btn" data-lang="ar" onclick="switchLang('ar')"><span class="flag">🇲🇦</span> AR</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
+        <span class="label" id="theme-label">Nuit</span>
+    </button>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="header-ornament" data-i18n="ornament">✦ Guide du Freelance ✦</div>
+        <h1>InFreelancing</h1>
+        <div class="header-sub" data-i18n="subtitle">Checklist Administrative Complète</div>
+        <p class="header-desc" data-i18n="desc">Tout ce qu'il faut faire — et quand le faire</p>
+    </div>
+
+    <div class="progress-wrap">
+        <div class="progress-top">
+            <span class="progress-label" data-i18n="progress">Progression</span>
+            <span class="progress-count" id="progress-text">0 / 11</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+
+    <div class="intro-card">
+        <p><strong data-i18n="intro_strong">Le freelancing, c'est la liberté — mais elle a ses papiers à remplir.</strong></p>
+        <p data-i18n="intro_text">Entre les démarches de création, les déclarations fiscales et sociales, la gestion des factures et les obligations légales, il est facile de se perdre. Ce guide recense tout ce qu'il faut faire, dans l'ordre.</p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="section-title">
+        <h2 data-i18n="sec1_title">1. Les bases pour bien démarrer</h2>
+        <div class="section-line"></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="card">
+        <div class="badge" data-i18n="step">Étape 01</div>
+        <div class="step-header"><h3 data-i18n="s1_title">Choisir le bon statut juridique</h3></div>
+        <ul>
+            <li><strong data-i18n="s1_li1_strong">Micro-Entreprise :</strong> <span data-i18n="s1_li1_text">Simplicité et rapidité. Cotisations calculées sur le CA, franchise de TVA (72 600 € services · 176 200 € commerce).</span></li>
+            <li><strong data-i18n="s1_li2_strong">Entreprise Individuelle (EI) :</strong> <span data-i18n="s1_li2_text">Pas de plafond de CA. Séparation du patrimoine depuis 2022.</span></li>
+            <li><strong data-i18n="s1_li3_strong">EURL :</strong> <span data-i18n="s1_li3_text">Responsabilité limitée aux apports. Formalités plus lourdes (statuts, comptabilité complète).</span></li>
+            <li><strong data-i18n="s1_li4_strong">SASU :</strong> <span data-i18n="s1_li4_text">Protection sociale renforcée (assimilé-salarié). Charges plus élevées.</span></li>
+            <li><strong data-i18n="s1_li5_strong">Portage Salarial :</strong> <span data-i18n="s1_li5_text">Solution hybride. Tu trouves tes clients, la société gère l'administratif (commission 5–15%).</span></li>
+        </ul>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="card">
+        <div class="badge" data-i18n="step2">Étape 02</div>
+        <div class="step-header"><h3 data-i18n="s2_title">Immatriculer son activité</h3></div>
+        <p data-i18n="s2_text">Obligatoire pour obtenir ton numéro SIRET et commencer à facturer. Depuis le 1er janvier 2023, cette démarche se fait exclusivement sur le <strong>Guichet Unique</strong> (formalites.entreprises.gouv.fr).</p>
+        <div class="tip"><strong data-i18n="s2_tip_strong">Astuce :</strong> <span data-i18n="s2_tip_text">En micro-entreprise, examine l'option du versement libératoire pour régler ton impôt en même temps que tes cotisations sociales.</span></div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="card">
+        <div class="badge" data-i18n="step3">Étape 03</div>
+        <div class="step-header"><h3 data-i18n="s3_title">Ouvrir un compte bancaire dédié</h3></div>
+        <p data-i18n="s3_text">Obligatoire pour les sociétés (SASU, EURL). Pour les micro-entreprises, obligatoire au-delà de <strong>10 000 € de CA pendant 2 années consécutives</strong>. Vivement recommandé dans tous les cas pour séparer finances personnelles et professionnelles.</p>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card">
+        <div class="badge" data-i18n="step4">Étape 04</div>
+        <div class="step-header"><h3 data-i18n="s4_title">Choisir son régime fiscal et social</h3></div>
+        <p data-i18n="s4_text">Selon le statut choisi, tu seras soumis à l'<strong>Impôt sur le Revenu (IR)</strong> ou à l'<strong>Impôt sur les Sociétés (IS)</strong>. Côté social : Travailleur Non-Salarié (TNS — moins de charges) ou Assimilé-Salarié (plus de protection, plus de cotisations).</p>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="card">
+        <div class="badge" data-i18n="step5">Étape 05</div>
+        <div class="step-header"><h3 data-i18n="s5_title">Assurances et conformité RGPD</h3></div>
+        <p data-i18n="s5_text">La <strong>RC Pro</strong> (Responsabilité Civile Professionnelle) est indispensable — et parfois légalement obligatoire selon ton métier. Si tu collectes des données clients, mets-toi en conformité RGPD : tiens un registre des traitements et publie une politique de confidentialité.</p>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section-title">
+        <h2 data-i18n="sec2_title">2. Les obligations régulières</h2>
+        <div class="section-line"></div>
+    </div>
+
+    <div class="card">
+        <div class="oblig-grid">
+            <div class="oblig-col">
+                <h3 data-i18n="oblig_monthly">📆 Chaque mois</h3>
+                <ul>
+                    <li data-i18n="oblig_m1">Déclarer le CA à l'URSSAF (même si 0 €)</li>
+                    <li data-i18n="oblig_m2">Suivre la TVA si applicable</li>
+                    <li data-i18n="oblig_m3">Mettre à jour le livre des recettes</li>
+                </ul>
+            </div>
+            <div class="oblig-col">
+                <h3 data-i18n="oblig_yearly">📅 Chaque année</h3>
+                <ul>
+                    <li data-i18n="oblig_y1">Formulaire 2042-C PRO (revenus)</li>
+                    <li data-i18n="oblig_y2">Réviser les contrats d'assurance</li>
+                    <li data-i18n="oblig_y3">Mettre à jour CGV et mentions légales</li>
+                    <li data-i18n="oblig_y4">Bilan tarifaire et performance</li>
+                </ul>
+            </div>
+        </div>
+        <div class="tip"><strong data-i18n="tip_rappel_strong">Rappel :</strong> <span data-i18n="tip_rappel_text">Le livre des recettes doit être conservé pendant <strong>10 ans</strong>. En cas de contrôle, l'absence de justificatifs peut entraîner une taxation forfaitaire.</span></div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section-title">
+        <h2 data-i18n="sec3_title">3. Ta checklist interactive</h2>
+        <div class="section-line"></div>
+    </div>
+
+    <div class="card">
+        <div class="checklist-title" data-i18n="checklist_label">Coche chaque étape au fur et à mesure :</div>
+
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl1">Choisir mon statut juridique</div><div class="item-sub" data-i18n="cl1_sub">Micro-entreprise, EI, EURL, SASU ou portage</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl2">Vérifier mon éligibilité au régime micro</div><div class="item-sub" data-i18n="cl2_sub">Plafonds de CA et conditions d'accès</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl3">Immatriculer et déclarer mon activité</div><div class="item-sub" data-i18n="cl3_sub">Via le Guichet Unique — obtenir mon SIRET</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl4">Opter pour le versement libératoire</div><div class="item-sub" data-i18n="cl4_sub">Si éligible et avantageux selon ma tranche</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl5">Ouvrir un compte bancaire dédié</div><div class="item-sub" data-i18n="cl5_sub">Séparer finances perso et pro</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl6">Souscrire aux assurances nécessaires</div><div class="item-sub" data-i18n="cl6_sub">RC Pro obligatoire + mutuelle santé TNS</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl7">Préparer mes modèles de devis et factures</div><div class="item-sub" data-i18n="cl7_sub">Mentions légales obligatoires incluses</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl8">Mettre en place la conformité RGPD</div><div class="item-sub" data-i18n="cl8_sub">Registre des traitements + politique de confidentialité</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl9">Déclarer mon chiffre d'affaires à l'URSSAF</div><div class="item-sub" data-i18n="cl9_sub">Mensuel ou trimestriel — même si CA = 0 €</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl10">Tenir mon livre des recettes à jour</div><div class="item-sub" data-i18n="cl10_sub">Conserver 10 ans — date, montant, client</div></div>
+        </div>
+        <div class="checklist-item" onclick="toggleItem(this)">
+            <div class="cb-wrap"><input type="checkbox"><div class="cb-box"></div></div>
+            <div><div class="item-text" data-i18n="cl11">Réaliser mon bilan annuel</div><div class="item-sub" data-i18n="cl11_sub">Performances, tarifs, formulaire 2042-C PRO</div></div>
+        </div>
+
+        <button class="reset-btn" onclick="resetAll()" data-i18n="reset">↺ Réinitialiser la checklist</button>
+    </div>
+
+    <div class="footer">
+        <div class="footer-line"></div>
+        <p data-i18n="footer_quote">L'aventure ne fait que commencer ✦</p>
+        <small data-i18n="footer_small">InFreelancing · Guide Administratif 2025</small>
+    </div>
+</div>
+
+<script>
+const I18N = {
+    fr: {
+        ornament: "✦ Guide du Freelance ✦",
+        subtitle: "Checklist Administrative Complète",
+        desc: "Tout ce qu'il faut faire — et quand le faire",
+        progress: "Progression",
+        intro_strong: "Le freelancing, c'est la liberté — mais elle a ses papiers à remplir.",
+        intro_text: "Entre les démarches de création, les déclarations fiscales et sociales, la gestion des factures et les obligations légales, il est facile de se perdre. Ce guide recense tout ce qu'il faut faire, dans l'ordre.",
+        sec1_title: "1. Les bases pour bien démarrer",
+        step: "Étape 01", step2: "Étape 02", step3: "Étape 03", step4: "Étape 04", step5: "Étape 05",
+        s1_title: "Choisir le bon statut juridique",
+        s1_li1_strong: "Micro-Entreprise :", s1_li1_text: "Simplicité et rapidité. Cotisations calculées sur le CA, franchise de TVA (72 600 € services · 176 200 € commerce).",
+        s1_li2_strong: "Entreprise Individuelle (EI) :", s1_li2_text: "Pas de plafond de CA. Séparation du patrimoine depuis 2022.",
+        s1_li3_strong: "EURL :", s1_li3_text: "Responsabilité limitée aux apports. Formalités plus lourdes (statuts, comptabilité complète).",
+        s1_li4_strong: "SASU :", s1_li4_text: "Protection sociale renforcée (assimilé-salarié). Charges plus élevées.",
+        s1_li5_strong: "Portage Salarial :", s1_li5_text: "Solution hybride. Tu trouves tes clients, la société gère l'administratif (commission 5–15%).",
+        s2_title: "Immatriculer son activité",
+        s2_text: "Obligatoire pour obtenir ton numéro SIRET et commencer à facturer. Depuis le 1er janvier 2023, cette démarche se fait exclusivement sur le <strong>Guichet Unique</strong> (formalites.entreprises.gouv.fr).",
+        s2_tip_strong: "Astuce :", s2_tip_text: "En micro-entreprise, examine l'option du versement libératoire pour régler ton impôt en même temps que tes cotisations sociales.",
+        s3_title: "Ouvrir un compte bancaire dédié",
+        s3_text: "Obligatoire pour les sociétés (SASU, EURL). Pour les micro-entreprises, obligatoire au-delà de <strong>10 000 € de CA pendant 2 années consécutives</strong>. Vivement recommandé dans tous les cas pour séparer finances personnelles et professionnelles.",
+        s4_title: "Choisir son régime fiscal et social",
+        s4_text: "Selon le statut choisi, tu seras soumis à l'<strong>Impôt sur le Revenu (IR)</strong> ou à l'<strong>Impôt sur les Sociétés (IS)</strong>. Côté social : Travailleur Non-Salarié (TNS — moins de charges) ou Assimilé-Salarié (plus de protection, plus de cotisations).",
+        s5_title: "Assurances et conformité RGPD",
+        s5_text: "La <strong>RC Pro</strong> (Responsabilité Civile Professionnelle) est indispensable — et parfois légalement obligatoire selon ton métier. Si tu collectes des données clients, mets-toi en conformité RGPD : tiens un registre des traitements et publie une politique de confidentialité.",
+        sec2_title: "2. Les obligations régulières",
+        oblig_monthly: "📆 Chaque mois",
+        oblig_m1: "Déclarer le CA à l'URSSAF (même si 0 €)", oblig_m2: "Suivre la TVA si applicable", oblig_m3: "Mettre à jour le livre des recettes",
+        oblig_yearly: "📅 Chaque année",
+        oblig_y1: "Formulaire 2042-C PRO (revenus)", oblig_y2: "Réviser les contrats d'assurance", oblig_y3: "Mettre à jour CGV et mentions légales", oblig_y4: "Bilan tarifaire et performance",
+        tip_rappel_strong: "Rappel :", tip_rappel_text: "Le livre des recettes doit être conservé pendant <strong>10 ans</strong>. En cas de contrôle, l'absence de justificatifs peut entraîner une taxation forfaitaire.",
+        sec3_title: "3. Ta checklist interactive",
+        checklist_label: "Coche chaque étape au fur et à mesure :",
+        cl1: "Choisir mon statut juridique", cl1_sub: "Micro-entreprise, EI, EURL, SASU ou portage",
+        cl2: "Vérifier mon éligibilité au régime micro", cl2_sub: "Plafonds de CA et conditions d'accès",
+        cl3: "Immatriculer et déclarer mon activité", cl3_sub: "Via le Guichet Unique — obtenir mon SIRET",
+        cl4: "Opter pour le versement libératoire", cl4_sub: "Si éligible et avantageux selon ma tranche",
+        cl5: "Ouvrir un compte bancaire dédié", cl5_sub: "Séparer finances perso et pro",
+        cl6: "Souscrire aux assurances nécessaires", cl6_sub: "RC Pro obligatoire + mutuelle santé TNS",
+        cl7: "Préparer mes modèles de devis et factures", cl7_sub: "Mentions légales obligatoires incluses",
+        cl8: "Mettre en place la conformité RGPD", cl8_sub: "Registre des traitements + politique de confidentialité",
+        cl9: "Déclarer mon chiffre d'affaires à l'URSSAF", cl9_sub: "Mensuel ou trimestriel — même si CA = 0 €",
+        cl10: "Tenir mon livre des recettes à jour", cl10_sub: "Conserver 10 ans — date, montant, client",
+        cl11: "Réaliser mon bilan annuel", cl11_sub: "Performances, tarifs, formulaire 2042-C PRO",
+        reset: "↺ Réinitialiser la checklist",
+        footer_quote: "L'aventure ne fait que commencer ✦",
+        footer_small: "InFreelancing · Guide Administratif 2025",
+        theme_night: "Nuit", theme_day: "Jour"
+    },
+    en: {
+        ornament: "✦ Freelancer Guide ✦",
+        subtitle: "Complete Administrative Checklist",
+        desc: "Everything you need to do — and when to do it",
+        progress: "Progress",
+        intro_strong: "Freelancing is freedom — but it comes with paperwork.",
+        intro_text: "Between registration steps, tax and social declarations, invoice management and legal obligations, it's easy to get lost. This guide lists everything you need to do, in order.",
+        sec1_title: "1. The basics to get started",
+        step: "Step 01", step2: "Step 02", step3: "Step 03", step4: "Step 04", step5: "Step 05",
+        s1_title: "Choose the right legal structure",
+        s1_li1_strong: "Micro-Enterprise:", s1_li1_text: "Simple and fast. Contributions calculated on revenue, VAT exemption (€72,600 services · €176,200 commerce).",
+        s1_li2_strong: "Sole Trader (EI):", s1_li2_text: "No revenue cap. Asset separation since 2022.",
+        s1_li3_strong: "EURL:", s1_li3_text: "Limited liability up to contributions. Heavier formalities (statutes, full accounting).",
+        s1_li4_strong: "SASU:", s1_li4_text: "Enhanced social protection (assimilated employee). Higher contributions.",
+        s1_li5_strong: "Umbrella Company:", s1_li5_text: "Hybrid solution. You find clients, the company handles admin (5–15% commission).",
+        s2_title: "Register your activity",
+        s2_text: "Required to get your SIRET number and start invoicing. Since January 1, 2023, this process is done exclusively on the <strong>Guichet Unique</strong> (formalites.entreprises.gouv.fr).",
+        s2_tip_strong: "Tip:", s2_tip_text: "As a micro-enterprise, consider the flat-rate option to pay your tax at the same time as your social contributions.",
+        s3_title: "Open a dedicated bank account",
+        s3_text: "Required for companies (SASU, EURL). For micro-enterprises, required beyond <strong>€10,000 in revenue for 2 consecutive years</strong>. Highly recommended in all cases to separate personal and professional finances.",
+        s4_title: "Choose your tax and social regime",
+        s4_text: "Depending on your structure, you'll be subject to <strong>Income Tax (IR)</strong> or <strong>Corporate Tax (IS)</strong>. Socially: Self-Employed (TNS — lower contributions) or Assimilated Employee (more protection, higher contributions).",
+        s5_title: "Insurance and GDPR compliance",
+        s5_text: "<strong>Professional Liability Insurance</strong> is essential — and sometimes legally required depending on your profession. If you collect client data, ensure GDPR compliance: maintain a processing registry and publish a privacy policy.",
+        sec2_title: "2. Regular obligations",
+        oblig_monthly: "📆 Every month",
+        oblig_m1: "Declare revenue to URSSAF (even if €0)", oblig_m2: "Track VAT if applicable", oblig_m3: "Update the receipts ledger",
+        oblig_yearly: "📅 Every year",
+        oblig_y1: "Form 2042-C PRO (income)", oblig_y2: "Review insurance contracts", oblig_y3: "Update T&Cs and legal notices", oblig_y4: "Pricing and performance review",
+        tip_rappel_strong: "Reminder:", tip_rappel_text: "The receipts ledger must be kept for <strong>10 years</strong>. In case of an audit, missing documentation may result in a flat-rate tax assessment.",
+        sec3_title: "3. Your interactive checklist",
+        checklist_label: "Check off each step as you go:",
+        cl1: "Choose my legal structure", cl1_sub: "Micro-enterprise, EI, EURL, SASU or umbrella",
+        cl2: "Verify my eligibility for micro status", cl2_sub: "Revenue thresholds and access conditions",
+        cl3: "Register and declare my activity", cl3_sub: "Via Guichet Unique — get my SIRET",
+        cl4: "Opt for flat-rate tax payment", cl4_sub: "If eligible and advantageous for my bracket",
+        cl5: "Open a dedicated bank account", cl5_sub: "Separate personal and business finances",
+        cl6: "Subscribe to necessary insurance", cl6_sub: "Mandatory professional liability + TNS health coverage",
+        cl7: "Prepare invoice and quote templates", cl7_sub: "Mandatory legal mentions included",
+        cl8: "Implement GDPR compliance", cl8_sub: "Processing registry + privacy policy",
+        cl9: "Declare my revenue to URSSAF", cl9_sub: "Monthly or quarterly — even if revenue = €0",
+        cl10: "Keep my receipts ledger updated", cl10_sub: "Keep for 10 years — date, amount, client",
+        cl11: "Complete my annual review", cl11_sub: "Performance, pricing, form 2042-C PRO",
+        reset: "↺ Reset checklist",
+        footer_quote: "The adventure is just beginning ✦",
+        footer_small: "InFreelancing · Administrative Guide 2025",
+        theme_night: "Night", theme_day: "Day"
+    },
+    es: {
+        ornament: "✦ Guía del Freelancer ✦",
+        subtitle: "Checklist Administrativa Completa",
+        desc: "Todo lo que necesitas hacer — y cuándo hacerlo",
+        progress: "Progreso",
+        intro_strong: "El freelancing es libertad — pero tiene papeles que rellenar.",
+        intro_text: "Entre los trámites de registro, las declaraciones fiscales y sociales, la gestión de facturas y las obligaciones legales, es fácil perderse. Esta guía enumera todo lo que necesitas hacer, en orden.",
+        sec1_title: "1. Los basics para empezar bien",
+        step: "Paso 01", step2: "Paso 02", step3: "Paso 03", step4: "Paso 04", step5: "Paso 05",
+        s1_title: "Elegir el estatus legal correcto",
+        s1_li1_strong: "Micro-Empresa:", s1_li1_text: "Simplicidad y rapidez. Cotizaciones calculadas sobre facturación, exención de IVA (72.600 € servicios · 176.200 € comercio).",
+        s1_li2_strong: "Empresa Individual (EI):", s1_li2_text: "Sin techo de facturación. Separación de patrimonio desde 2022.",
+        s1_li3_strong: "EURL:", s1_li3_text: "Responsabilidad limitada a los aportes. Trámites más pesados (estatutos, contabilidad completa).",
+        s1_li4_strong: "SASU:", s1_li4_text: "Protección social reforzada (asimilado a empleado). Cotizaciones más altas.",
+        s1_li5_strong: "Empresa de Trabajo Temporal:", s1_li5_text: "Solución híbrida. Tú encuentras clientes, la empresa gestiona lo administrativo (comisión 5–15%).",
+        s2_title: "Registrar la actividad",
+        s2_text: "Obligatorio para obtener tu número SIRET y empezar a facturar. Desde el 1 de enero de 2023, este trámite se hace exclusivamente en el <strong>Guichet Unique</strong> (formalites.entreprises.gouv.fr).",
+        s2_tip_strong: "Consejo:", s2_tip_text: "Como micro-empresa, examina la opción del pago liberatorio para abonar tu impuesto al mismo tiempo que tus cotizaciones sociales.",
+        s3_title: "Abrir una cuenta bancaria dedicada",
+        s3_text: "Obligatorio para sociedades (SASU, EURL). Para micro-empresas, obligatorio a partir de <strong>10.000 € de facturación durante 2 años consecutivos</strong>. Muy recomendable en todos los casos para separar finanzas personales y profesionales.",
+        s4_title: "Elegir el régimen fiscal y social",
+        s4_text: "Según el estatus elegido, estarás sujeto al <strong>Impuesto sobre la Renta (IR)</strong> o al <strong>Impuesto de Sociedades (IS)</strong>. Socialmente: Trabajador Autónomo (TNS — menos cotizaciones) o Asimilado a Empleado (más protección, más cotizaciones).",
+        s5_title: "Seguros y cumplimiento RGPD",
+        s5_text: "El <strong>Seguro de Responsabilidad Civil Profesional</strong> es indispensable — y a veces legalmente obligatorio según tu profesión. Si recoges datos de clientes, cumple el RGPD: lleva un registro de tratamientos y publica una política de privacidad.",
+        sec2_title: "2. Obligaciones periódicas",
+        oblig_monthly: "📆 Cada mes",
+        oblig_m1: "Declarar facturación a URSSAF (incluso si 0 €)", oblig_m2: "Seguimiento del IVA si aplica", oblig_m3: "Actualizar libro de ingresos",
+        oblig_yearly: "📅 Cada año",
+        oblig_y1: "Formulario 2042-C PRO (ingresos)", oblig_y2: "Revisar contratos de seguro", oblig_y3: "Actualizar Términos y Condiciones", oblig_y4: "Revisión de precios y rendimiento",
+        tip_rappel_strong: "Recordatorio:", tip_rappel_text: "El libro de ingresos debe conservarse durante <strong>10 años</strong>. En caso de auditoría, la falta de justificantes puede resultar en una imposición forfaitaire.",
+        sec3_title: "3. Tu checklist interactivo",
+        checklist_label: "Marca cada paso a medida que avanzas:",
+        cl1: "Elegir mi estatus legal", cl1_sub: "Micro-empresa, EI, EURL, SASU o ETT",
+        cl2: "Verificar mi elegibilidad para el régimen micro", cl2_sub: "Techos de facturación y condiciones de acceso",
+        cl3: "Registrar y declarar mi actividad", cl3_sub: "A través de Guichet Unique — obtener mi SIRET",
+        cl4: "Optar por el pago liberatorio", cl4_sub: "Si soy elegible y es ventajoso según mi tramo",
+        cl5: "Abrir una cuenta bancaria dedicada", cl5_sub: "Separar finanzas personales y profesionales",
+        cl6: "Suscribir los seguros necesarios", cl6_sub: "RC Pro obligatorio + cobertura sanitaria TNS",
+        cl7: "Preparar plantillas de presupuestos y facturas", cl7_sub: "Menciones legales obligatorias incluidas",
+        cl8: "Implementar cumplimiento RGPD", cl8_sub: "Registro de tratamientos + política de privacidad",
+        cl9: "Declarar mi facturación a URSSAF", cl9_sub: "Mensual o trimestral — incluso si facturación = 0 €",
+        cl10: "Mantener actualizado el libro de ingresos", cl10_sub: "Conservar 10 años — fecha, monto, cliente",
+        cl11: "Realizar mi revisión anual", cl11_sub: "Rendimiento, precios, formulario 2042-C PRO",
+        reset: "↺ Reiniciar checklist",
+        footer_quote: "La aventura solo está comenzando ✦",
+        footer_small: "InFreelancing · Guía Administrativa 2025",
+        theme_night: "Noche", theme_day: "Día"
+    },
+    ar: {
+        ornament: "✦ دليل المستقلين ✦",
+        subtitle: "قائمة مهام إدارية شاملة",
+        desc: "كل ما عليك فعله — ومتى تفعله",
+        progress: "التقدم",
+        intro_strong: "العمل المستقل هو الحرية — لكنه يأتي مع أوراق يجب ترتيبها.",
+        intro_text: "بين خطوات التسجيل والإعلانات الضريبية والاجتماعية وإدارة الفواتير والالتزامات القانونية، يسهل الضياع. يسرد هذا الدليل كل ما عليك فعله، بالترتيب.",
+        sec1_title: "1. الأساسيات للبدء بشكل جيد",
+        step: "الخطوة 01", step2: "الخطوة 02", step3: "الخطوة 03", step4: "الخطوة 04", step5: "الخطوة 05",
+        s1_title: "اختيار الوضع القانوني المناسب",
+        s1_li1_strong: "المشروع الصغير:", s1_li1_text: "البساطة والسرعة. Contributions محسوبة على الإيرادات، إعفاء من الضريبة على القيمة المضافة (72,600 € خدمات · 176,200 € تجارة).",
+        s1_li2_strong: "المؤسسة الفردية (EI):", s1_li2_text: "لا سقف للإيرادات. فصل الممتلكات منذ 2022.",
+        s1_li3_strong: "EURL:", s1_li3_text: "مسؤولية محدودة بالمساهمات. إجراءات أثقل (نظام داخلي، محاسبة كاملة).",
+        s1_li4_strong: "SASU:", s1_li4_text: "حماية اجتماعية معززة (مُعادَل للموظف). contributions أعلى.",
+        s1_li5_strong: "شركة Umbrella:", s1_li5_text: "حل هجين. أنت تجد العملاء، الشركة تدير الإدارية (عمولة 5–15%).",
+        s2_title: "تسجيل النشاط",
+        s2_text: "إلزامي للحصول على رقم SIRET وبدء الفوترة. منذ 1 يناير 2023، تتم هذه الإجراءات حصرياً عبر <strong>Guichet Unique</strong> (formalites.entreprises.gouv.fr).",
+        s2_tip_strong: "نصيحة:", s2_tip_text: "كمشروع صغير، فكر في خيار الدفع المحرر لسداد ضريبتك في نفس وقت contributions الاجتماعية.",
+        s3_title: "فتح حساب بنكي مخصص",
+        s3_text: "إلزامي للشركات (SASU, EURL). للمشاريع الصغيرة، إلزامي عند تجاوز <strong>10,000 € إيرادات لمدة سنتين متتاليتين</strong>. موصى به بشدة في جميع الحالات لفصل finances الشخصية والمهنية.",
+        s4_title: "اختيار النظام الضريبي والاجتماعي",
+        s4_text: "حسب الوضع المختار، ستخضع لـ <strong>ضريبة الدخل (IR)</strong> أو <strong>ضريبة الشركات (IS)</strong>. اجتماعياً: عامل غير تابع (TNS — contributions أقل) أو مُعادَل للموظف (حماية أكثر، contributions أعلى).",
+        s5_title: "التأمين والامتثال للائحة العامة لحماية البيانات",
+        s5_text: "<strong>التأمين المدني المهني</strong> ضروري — وأحياناً مطلوب قانونياً حسب مهنتك. إذا كنت تجمع بيانات العملاء، تأكد من الامتثال للائحة العامة: حافظ على سجل المعالجات وانشر سياسة الخصوصية.",
+        sec2_title: "2. الالتزامات الدورية",
+        oblig_monthly: "📆 كل شهر",
+        oblig_m1: "الإبلاغ عن الإيرادات لـ URSSAF (حتى لو 0 €)", oblig_m2: "تتبع الضريبة على القيمة المضافة إن وجدت", oblig_m3: "تحديث سجل الإيرادات",
+        oblig_yearly: "📅 كل سنة",
+        oblig_y1: "استمارة 2042-C PRO (الدخل)", oblig_y2: "مراجعة عقود التأمين", oblig_y3: "تحديث الشروط والأحكام القانونية", oblig_y4: "مراجعة التسعير والأداء",
+        tip_rappel_strong: "تذكير:", tip_rappel_text: "يجب الاحتفاظ بسجل الإيرادات لمدة <strong>10 سنوات</strong>. في حالة التدقيق، قد يؤدي غياب الوثائق إلى ضريبة تقديرية.",
+        sec3_title: "3. قائمة مهامك التفاعلية",
+        checklist_label: "حدد كل خطوة أثناء تقدمك:",
+        cl1: "اختيار وضعي القانوني", cl1_sub: "مشروع صغير، EI، EURL، SASU أو Umbrella",
+        cl2: "التحقق من أهليتي لنظام المشاريع الصغيرة", cl2_sub: "السقف الإيرادي وشروط الوصول",
+        cl3: "تسجيل والتصريح عن نشاطي", cl3_sub: "عبر Guichet Unique — الحصول على SIRET",
+        cl4: "الاختيار للدفع المحرر", cl4_sub: "إذا كنت مؤهلاً ومفيداً حسب فئتي",
+        cl5: "فتح حساب بنكي مخصص", cl5_sub: "فصل Finances الشخصية والمهنية",
+        cl6: "الاشتراك في التأمينات اللازمة", cl6_sub: "تأمين مدني إلزامي + تغطية صحية TNS",
+        cl7: "إعداد نماذج عروض الأسعار والفواتير", cl7_sub: "الإشارات القانونية الإلزامية مضمنة",
+        cl8: "تطبيق الامتثال للائحة العامة", cl8_sub: "سجل المعالجات + سياسة الخصوصية",
+        cl9: "التصريح عن إيراداتي لـ URSSAF", cl9_sub: "شهري أو ربع سنوي — حتى لو الإيرادات = 0 €",
+        cl10: "تحديث سجل الإيرادات", cl10_sub: "الاحتفاظ لمدة 10 سنوات — التاريخ، المبلغ، العميل",
+        cl11: "إجراء مراجعتي السنوية", cl11_sub: "الأداء، التسعير، استمارة 2042-C PRO",
+        reset: "↺ إعادة تعيين القائمة",
+        footer_quote: "المغامرة بدأت للتو ✦",
+        footer_small: "InFreelancing · الدليل الإداري 2025",
+        theme_night: "ليل", theme_day: "نهار"
+    }
+};
+
+let currentLang = localStorage.getItem('infreelancing-lang') || 'fr';
+
+function switchLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('infreelancing-lang', lang);
+    const isRtl = lang === 'ar';
+    document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', lang);
+
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+
+    const t = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.innerHTML = t[key];
+    });
+
+    const ti = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.getElementById('theme-label').textContent = ti ? t.theme_night : t.theme_day;
+}
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+    const t = I18N[currentLang];
+    document.getElementById('theme-label').textContent = isDark ? t.theme_day : t.theme_night;
+    localStorage.setItem('infreelancing-theme', isDark ? 'light' : 'dark');
+}
+
+(function() {
+    const saved = localStorage.getItem('infreelancing-theme');
+    if (saved === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.getElementById('theme-icon').textContent = '☀️';
+    }
+    switchLang(currentLang);
+})();
+
+function toggleItem(el) {
+    const cb = el.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    el.classList.toggle('done', cb.checked);
+    updateProgress();
+}
+
+function updateProgress() {
+    const items = document.querySelectorAll('.checklist-item');
+    const done = document.querySelectorAll('.checklist-item.done').length;
+    const total = items.length;
+    document.getElementById('progress-text').textContent = done + ' / ' + total;
+    document.getElementById('progress-fill').style.width = (done / total * 100) + '%';
+}
+
+function resetAll() {
+    document.querySelectorAll('.checklist-item').forEach(item => {
+        item.classList.remove('done');
+        item.querySelector('input').checked = false;
+    });
+    updateProgress();
+}
+
+updateProgress();
+</script>
+</body>
+</html>
